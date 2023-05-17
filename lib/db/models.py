@@ -1,75 +1,48 @@
-# # 1.✅ Build out Model
-# # Import from sqlalchemy: PrimaryKeyConstraint, Column, String, Integer
-# # Import from sqlalchemy.ext.declarative, declarative_base
-# from sqlalchemy import (PrimaryKeyConstraint, Column, String, Integer)
-# from sqlalchemy.ext.declarative import declarative_base
-# # 1.a ✅ Initialize declarative_base and save it to a variable called Base
 
-# Base = declarative_base()
-# # 1.b ✅ Create a class Pet that inherits from Base
+from sqlalchemy import (PrimaryKeyConstraint, Column, String, Integer, Date)
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-# class Artist(Base):
-#     __tablename__ = "Artist"
-#     # Set the "__tablename__" to 'pets
-#     # Add table args for a primary key constraint based off the id
-#     __table_args__ = (PrimaryKeyConstraint('id'), )
-#     # Create the following columns
-#     # id -> type integer
-#     # name -> type string
-#     # species -> type string
-#     # breed -> type string
-#     # temperament -> type string
+Base = declarative_base()
 
-#     id = Column(Integer())
-#     name = Column(String())
-#     genre = Column(String())
+class Artist(Base):
+    __tablename__ = "artists"
+
+    __table_args__ = (PrimaryKeyConstraint('id'), )
+   
+    id = Column(Integer())
+    name = Column(String())
+    genre = Column(String()) 
+    
+    def __repr__(self):
+        return f"id: {self.id}, name: {self.name}, genre: {self.genre}"
+ 
+
+class Accommadation(Base):
+    __tablename__ = "accommadations"
+
+    __table_args__ = (PrimaryKeyConstraint('id'), )
+   
+    id = Column(Integer())
+    age_limit= Column(String())
+    camping_availability = Column(String())
+    festival_capacity = Column(Integer())
+
+    def __repr__(self):
+        return f"id: {self.id}, age_limit: {self.age_limit}, camping_availability: {self.camping_availability}, festival_capacity: {self.festival_capacity}"
     
 
-#     # add a __repr__ method that returns a string containing the id, name, species, breed and temperament of our class
+class Festival(Base):
+    __tablename__ = "festivals"
 
-#     def __repr__(self):
-#         return f"id: {self.id}, name: {self.name}, species: {self.species}, breed: {self.breed}, temperament: {self.temperament}"
-    
-# class Event(Base):
-#     __tablename__ = "Events"
-#     # Set the "__tablename__" to 'pets
-#     # Add table args for a primary key constraint based off the id
-#     __table_args__ = (PrimaryKeyConstraint('id'), )
-    # Create the following columns
-    # id -> type integer
-    # name -> type string
-    # species -> type string
-    # breed -> type string
-    # temperament -> type string
+    __table_args__ = (PrimaryKeyConstraint('id'), )
+   
+    id = Column(Integer())
+    name = Column(String())
+    date = Column(Date()) 
+    location = Column(String())
+    price = Column(Integer())
 
-    # id = Column(Integer())
-    # name = Column(String())
-    # genre = Column(String())
-
-
-
-# Note: Nothing further goes in this file.
-# The following will generate a number of folders and files
-
-# 2.✅ Migrations
-# In the app directory run `alembic init migrations`
-# Your directory structure should look like the following
-# └── migrations
-#     └── versions
-#     ├── env.py
-#     ├── README
-#     ├── script.py.mako
-# ├── alembic.ini
-# ├── console.py
-# └── models.py
-
-# 2.b Configuration
-    # In alembic.ini, find `sqlalchemy.url`` and set it to `sqlalchemy.url = sqlite:///pet_app.db`
-    # In env.py, find `target_metadata` and add `from models import Base` above it. Next, set target_metadata to `target_metadata = Base.metadata`
-
-# 2.c ✅ Generate a migration by running `alembic revision --autogenerate -m "Added Pet model"`
-    # pet_app.db should have been added to your file structure
-
-    # Take the time to review the migration and verify the database with SQLite Explorer or DB Browser
-
-# 3✅ Head to debug.py to test out CRUD actions.
+    def __repr__(self):
+        return f"id: {self.id}, name: {self.name}, location: {self.location}, date: {self.date}, location: {self.location}, price: {self.price}"
