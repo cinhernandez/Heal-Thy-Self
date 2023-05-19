@@ -66,8 +66,8 @@ if __name__ == '__main__':
 
     # Session = sessionmaker(bind=engine)
     # session = Session()
-    # record = session.query(Artist).filter_by(id=6).first()
-    # record.name = "Duke Dumont"
+    # record = session.query(Artist).filter_by(id=15).first()
+    # record.genre = "Dubstep"
     # session.commit()
 
     # session.close()
@@ -77,8 +77,8 @@ if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    San_holo= Artist(name="San Holo", genre="Trance")
-    session.add(San_holo)
+    Excision = Artist(name="Excision", genre="Dubstep")
+    session.add(Excision)
     session.commit()
 
     session.close()
