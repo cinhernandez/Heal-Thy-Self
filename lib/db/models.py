@@ -66,8 +66,8 @@ if __name__ == '__main__':
 
     # Session = sessionmaker(bind=engine)
     # session = Session()
-    # record = session.query(Artist).filter_by(id=15).first()
-    # record.genre = "Dubstep"
+    # record = session.query(Artist).filter_by(id=25).first()
+    # record.genre = "Dubstep, Future Bass, Melodic Dubs"
     # session.commit()
 
     # session.close()
@@ -77,8 +77,8 @@ if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    Excision = Artist(name="Excision", genre="Dubstep")
-    session.add(Excision)
+    Seven_lion = Artist(name="Seven Lions", genre="Dubstep, Trance ")
+    session.add(Seven_lion)
     session.commit()
 
     session.close()
