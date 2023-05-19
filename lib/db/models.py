@@ -66,19 +66,29 @@ if __name__ == '__main__':
 
     # Session = sessionmaker(bind=engine)
     # session = Session()
-    # record = session.query(Festival).filter_by(id=19).first()
-    # record.name = "Sonic Therapy"
+    # record = session.query(Artist).filter_by(id=6).first()
+    # record.name = "Duke Dumont"
     # session.commit()
 
     # session.close()
 
-#-------------------ADDS ITEMS TO THE TABLE-----------------
+#-------------------ADDS ITEMS TO THE TABLE-------------------
 
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    Splash_house = Festival(id=20, name="Splash House", date="06-09-23", location="Palm Springs, CA", price=300)
-    session.add(Splash_house)
+    Armin_van_buuren = Artist(id=13, name="Armin Van Buuren", genre="Trance")
+    session.add(Armin_van_buuren)
     session.commit()
 
     session.close()
+
+
+    #KIND OF MADE UP WITH BEING ALL AGES AND 16+
+
+    #Breakaway (16+)
+    #Sonic Therapy (All ages)
+    #Dancefest (All ages)
+    #FAM Fest (All ages)
+    #Chasing Sunsets (16+)
+    #Awakening Music Festival (16+)
