@@ -77,8 +77,8 @@ if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    Armin_van_buuren = Artist(id=13, name="Armin Van Buuren", genre="Trance")
-    session.add(Armin_van_buuren)
+    San_holo= Artist(name="San Holo", genre="Trance")
+    session.add(San_holo)
     session.commit()
 
     session.close()
