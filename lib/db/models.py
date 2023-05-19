@@ -72,7 +72,7 @@ if __name__ == '__main__':
 
     # session.close()
 
-#-------------------ADDS ITEMS TO THE TABLE-------------------
+#-------------------ADDS ITEMS TO THE TABLE-----------------
 
     Session = sessionmaker(bind=engine)
     session = Session()
