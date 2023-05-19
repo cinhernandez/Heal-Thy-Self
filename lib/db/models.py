@@ -1,5 +1,5 @@
 
-from sqlalchemy import Column, String, Integer, Date, func
+from sqlalchemy import Column, String, Integer, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -43,7 +43,7 @@ class Festival(Base):
    
     id = Column(Integer(), primary_key=True)
     name = Column(String())
-    date = Column(Date()) 
+    date = Column(String()) 
     location = Column(String())
     price = Column(Integer())
 
@@ -62,11 +62,23 @@ if __name__ == '__main__':
     engine = create_engine('sqlite:///edm.db')
     Base.metadata.create_all(engine)
 
+#-------------------UPDATES ITEMS IN THE TABLE-------------------
+
     # Session = sessionmaker(bind=engine)
     # session = Session()
-
-    # chris_lake = Artist(id=2, name="Chris Lake", genre="House")
-    # session.add(chris_lake)
+    # record = session.query(Festival).filter_by(id=19).first()
+    # record.name = "Sonic Therapy"
     # session.commit()
 
     # session.close()
+
+#-------------------ADDS ITEMS TO THE TABLE-------------------
+
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    Splash_house = Festival(id=20, name="Splash House", date="06-09-23", location="Palm Springs, CA", price=300)
+    session.add(Splash_house)
+    session.commit()
+
+    session.close()
