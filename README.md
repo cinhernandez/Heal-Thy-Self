@@ -5,7 +5,8 @@
 - Will be given a choice to login and register as a user
 - Pick from the genre of choice
 - Pick an artist of choice
-- Accommadations (Age limit, camping)
+- Accommadations (Age limit, camping) 
+    ----FESTIVAL CAPACITY WILL BE CHANGED AND ADDED SECTION TO THE FESTIVAL TABLE --- (IN PROGRESS)
 - After selecting choice or choices the user will be given festival options to chose from
 - There will be an option for the user to save their festival options or add to cart 
 - The user will be able to purchase tickets directly by adding to cart
