@@ -60,8 +60,12 @@ class AddToCart(Base):
 
 
 if __name__ == '__main__':
-    engine = create_engine('sqlite:///edm.db')
-    Base.metadata.create_all(engine)
+    pass
+#-------------------CREATES THE TABLE-------------------
+#--------UNCOMMENT THIS TO CREATE THE TABLE-------------------
+
+    # engine = create_engine('sqlite:///edm.db')
+    # Base.metadata.create_all(engine)
 
 #-------------------UPDATES ITEMS IN THE TABLE-------------------
 
@@ -104,3 +108,4 @@ if __name__ == '__main__':
 
     # session.commit()
     # session.close()
+
