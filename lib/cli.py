@@ -35,3 +35,123 @@ if __name__ == '__main__':
     print('𓍊𓋼𓍊𓋼𓍊' * int(terminal_width / 6))
 
     print("Welcome to the EDM Festival Finder!")
+    print("Please enter your name to get started:")
+    user_name = input(">>> ")
+    clear()
+
+    print(f"Welcome {user_name}!")
+    print("Please enter your location to get started:")
+    user_location = input(">>> ")
+    clear()
+
+    print("Choose an option")
+    print("111\t=>\tSee all EDM Festivals in your area")
+    print("222\t=>\tSee all Artists")
+    print("333\t=>\tSee all Accommodations")
+    print("444\t=>\tSee all Festivals")
+    print("555\t=>\tSee all Festivals with Accommodations")
+    print("666\t=>\tSee all Festivals with Artists")
+    print("777\t=>\tSee all Festivals with Artists and Accommodations")
+    print("888\t=>\tSee all Festivals with Artists and Accommodations in your area")
+    print("999\t=>\tSee all Festivals with Artists and Accommodations in your area and their prices")
+
+    user_input = input(">>> ")
+
+    if user_input == "111":
+        clear()
+        print("Here are all the EDM Festivals in your area:")
+        for festival in session.query(Festival).all():
+            print(festival.name)
+        print("Press any key to exit")
+        input(">>> ")
+        clear()
+
+    elif user_input == "222":
+        clear()
+        print("Here are all the Artists:")
+        for artist in session.query(Artist).all():
+            print(artist.name)
+        print("Press any key to exit")
+        input(">>> ")
+        clear()
+    
+    elif user_input == "333":
+        clear()
+        print("Here are all the Accommodations:")
+        for accommadation in session.query(Accommadation).all():
+            print(accommadation.name)
+        print("Press any key to exit")
+        input(">>> ")
+        clear()
+
+    elif user_input == "444":
+        clear()
+        print("Here are all the Festivals:")
+        for festival in session.query(Festival).all():  
+            print(festival.name)    
+        print("Press any key to exit")
+        input(">>> ")
+        clear()
+
+    elif user_input == "555":
+        clear()
+        print("Here are all the Festivals with Accommodations:")
+        for festival in session.query(Festival).all():
+            if festival.accommadation:
+                print(festival.name)
+        print("Press any key to exit")
+        input(">>> ")
+        clear()
+    
+    elif user_input == "666":
+        clear()
+        print("Here are all the Festivals with Artists:")
+        for festival in session.query(Festival).all():
+            if festival.artists:
+                print(festival.name)
+        print("Press any key to exit")
+        input(">>> ")
+        clear()
+
+    elif user_input == "777":
+        clear()
+        print("Here are all the Festivals with Artists and Accommodations:")
+        for festival in session.query(Festival).all():
+            if festival.artists and festival.accommadation:
+                print(festival.name)
+        print("Press any key to exit")
+        input(">>> ")
+        clear()
+
+    elif user_input == "888":
+        clear()
+        print("Here are all the Festivals with Artists and Accommodations in your area:")
+        for festival in session.query(Festival).all():
+            if festival.artists and festival.accommadation and festival.location == user_location:
+                print(festival.name)
+        print("Press any key to exit")
+        input(">>> ")
+        clear()
+
+    elif user_input == "999":
+        clear()
+        print("Here are all the Festivals with Artists and Accommodations in your area and their prices:")
+        for festival in session.query(Festival).all():
+            if festival.artists and festival.accommadation and festival.location == user_location:
+                print(festival.name, " - ", festival.price)
+        print("Press any key to exit")
+        input(">>> ")
+        clear()
+
+    else:
+        print("Invalid input")
+        print("Press any key to exit")
+        input(">>> ")
+        clear()
+
+    print("Thank you for using the EDM Festival Finder!")
+    print("Goodbye!")
+    print("Press any key to exit")
+    input(">>> ")
+    clear()
+

@@ -72,7 +72,7 @@ def main():
   
         #After the completion of one round a question is prompted to the user asking whether you want to continue the code execution or you want to exit the code depending upon the input provided by the user further actions are taken if the user wants to continue the code execution and perform further operations related to encryption and decryption of the string the code is continued whereas on the other hand if the user wants to exit the code execution the exit function is called and the program is ended  
           
-                      if continue_or_exit == 'y' or continue_or_exit == 'Y':  
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':  
             pass  
         elif continue_or_exit == 'n' or continue_or_exit == 'N':  
             sys.exit()  
