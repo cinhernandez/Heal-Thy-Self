@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+
 Base = declarative_base()
 
 class Genre_Options(Base):
@@ -66,22 +67,21 @@ if __name__ == '__main__':
 
     # Session = sessionmaker(bind=engine)
     # session = Session()
-    # record = session.query(Artist).filter_by(id=25).first()
-    # record.genre = "Dubstep, Future Bass, Melodic Dubs"
+    # record = session.query(Artist).filter_by(id=34).first()
+    # record.genre = "Hardstyle"
     # session.commit()
 
     # session.close()
 
 #-------------------ADDS ITEMS TO THE TABLE-------------------
 
-    Session = sessionmaker(bind=engine)
-    session = Session()
+    # Session = sessionmaker(bind=engine)
+    # session = Session()
 
-    Seven_lion = Artist(name="Seven Lions", genre="Dubstep, Trance ")
-    session.add(Seven_lion)
-    session.commit()
-
-    session.close()
+    # Vibra_sphere = Artist(name="Vibra Sphere", genre="Psytrance")
+    # session.add(Vibra_sphere)
+    # session.commit()
+    # session.close()
 
 
     #KIND OF MADE UP WITH BEING ALL AGES AND 16+
@@ -92,3 +92,15 @@ if __name__ == '__main__':
     #FAM Fest (All ages)
     #Chasing Sunsets (16+)
     #Awakening Music Festival (16+)
+
+
+#-------------------DELETES ITEMS FROM THE TABLE-------------------
+
+    # Session = sessionmaker(bind=engine)
+    # session = Session()
+
+    # record = session.query(Genre_Options).filter_by(id=8).first()
+    # session.delete(record)
+
+    # session.commit()
+    # session.close()
