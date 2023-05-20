@@ -2,8 +2,14 @@
 
 ## Learning Goals
 
-- Discuss the basic directory structure of a CLI.
-- Outline the first steps in building a CLI.
+- Will be given a choice to login and register as a user
+- Pick from the genre of choice
+- Pick an artist of choice
+- Accommadations (Age limit, camping)
+- After selecting choice or choices the user will be given festival options to chose from
+- There will be an option for the user to save their festival options or add to cart 
+- The user will be able to purchase tickets directly by adding to cart
+- Will be able to use credit/debit to complete purchase at check out 
 
 ***
 
