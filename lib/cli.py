@@ -46,6 +46,20 @@ if __name__ == '__main__':
     clear()  # Clear the screen
     print_slowly("Here is a list of all the genres:")
     genre_options = session.query(Genre_Option)
+
+
+    print('''
+
+
+            ────█▀█▄▄▄▄─────██▄
+            ────█▀▄▄▄▄█─────█▀▀█
+            ─▄▄▄█─────█──▄▄▄█
+            ██▀▄█─▄██▀█─███▀█
+            ─▀▀▀──▀█▄█▀─▀█▄█▀
+
+        ''')
+
+
     create_genre_options_table(genre_options)  # Display the list of genres
     genre_option = None
     while not genre_option:
@@ -55,6 +69,18 @@ if __name__ == '__main__':
         clear()
         print_slowly(f"Genre selected: {genre_option.genre}")
         festivals = get_festivals_by_genre(genre_option)
+
+        print('''
+
+            ▒▒▄▀▀▀▀▀▄▒▒▒▒▒▄▄▄▄▄▒▒▒
+            ▒▐░▄░░░▄░▌▒▒▄█▄█▄█▄█▄▒
+            ▒▐░▀▀░▀▀░▌▒▒▒▒▒░░░▒▒▒▒
+            ▒▒▀▄░═░▄▀▒▒▒▒▒▒░░░▒▒▒▒
+            ▒▒▐░▀▄▀░▌▒▒▒▒▒▒░░░▒▒▒▒
+
+        
+                ''')
+
     if festivals:
         print_slowly(f"Here are the festival events for the genre '{genre_option.genre}':")
         create_festivals_table(festivals)  # Display the festival events for the selected genre
@@ -78,6 +104,7 @@ if __name__ == '__main__':
                 print_slowly(f"Here are the festival events for the genre '{genre_option.genre}':")
                 create_festivals_table(festivals)
                 add_to_cart = fill_cart(session, genre_option)  # Add festival tickets to the cart
+
                 if add_to_cart:
                     show_cart(add_to_cart)  # Display the updated cart contents
                     add_another = input("Would you like to add another festival to your cart? (Y/n) ")
