@@ -2,10 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import os
 
+from helpers import *
 from db.models import (Base, Genre_Option, Festival, Add_To_Cart)
 
 
-engine = create_engine('sqlite:///edm.db')
+engine = create_engine('sqlite:///music_festivals.db')
 session = sessionmaker(bind=engine)()
 
 terminal_width = os.get_terminal_size().columns
@@ -47,6 +48,11 @@ if __name__ == '__main__':
     print("Here is a list of all the genres:")
     genre_options = session.query(Genre_Option)
     create_genre_options_table(genre_options)
+    
 
+    genre_option = None
+    while not genre_option:
+        genre_option_id = input('Please enter the ID of the genre you wish to look at: ')
+        genre_option = session.query(Genre_Option).filter(Genre_Option.id == genre_option_id).one_or_none()
     
    
