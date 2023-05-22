@@ -2,7 +2,7 @@
 from sqlalchemy import Column, String, Integer, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 
 
 Base = declarative_base()
@@ -15,6 +15,9 @@ class Genre_Options(Base):
 
     def __repr__(self):
         return f"id: {self.id}, name: {self.name}"
+    
+      #establishes relationship between genre_options and artist
+    artists = relationship("Artist", back_populates="genre_option")
 
 class Artist(Base):
     __tablename__ = "artists"
@@ -25,6 +28,9 @@ class Artist(Base):
     
     def __repr__(self):
         return f"id: {self.id}, name: {self.name}, genre: {self.genre}"
+    
+        #establishes relationship between artist and genre_options
+    genre_option = relationship("Genre_Options", back_populates="artists")
     
 
 class Accommadation(Base):
@@ -37,6 +43,10 @@ class Accommadation(Base):
 
     def __repr__(self):
         return f"id: {self.id}, age_limit: {self.age_limit}, camping_availability: {self.camping_availability}, festival_capacity: {self.festival_capacity}"
+    
+        #establishes relationship between accommodation and festival
+    festival = relationship("Festival", back_populates="accommodations")
+
     
 
 class Festival(Base):
@@ -51,6 +61,11 @@ class Festival(Base):
     def __repr__(self):
         return f"id: {self.id}, name: {self.name}, location: {self.location}, date: {self.date}, location: {self.location}, price: {self.price}"
     
+    #establishes relationship between festival and artist
+    accommodations = relationship("Accommodation", back_populates="festival")
+    #establishes relationship between festival and add_to_cart
+    add_to_carts = relationship("AddToCart", back_populates="festival")
+    
 
 class AddToCart(Base):
     __tablename__ = "add_to_carts"
@@ -58,6 +73,8 @@ class AddToCart(Base):
     id = Column(Integer(), primary_key=True)
     festival_id = Column(Integer())
 
+    #establishes relationship between festival and add_to_cart
+    festival = relationship("Festival", back_populates="add_to_carts")
 
 if __name__ == '__main__':
     pass
