@@ -1,5 +1,5 @@
 
-from sqlalchemy import Column, String, Integer, func
+from sqlalchemy import Column, String, Integer, func, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship
@@ -17,6 +17,7 @@ class Genre_Options(Base):
         return f"id: {self.id}, name: {self.name}"
     
       #establishes relationship between genre_options and artist
+    artist_id = Column(Integer(), ForeignKey('artists.id'))
     artists = relationship("Artist", back_populates="genre_option")
 
 class Artist(Base):
@@ -30,22 +31,24 @@ class Artist(Base):
         return f"id: {self.id}, name: {self.name}, genre: {self.genre}"
     
         #establishes relationship between artist and genre_options
+    artist_id = Column(Integer(), ForeignKey('artists.id'))
     genre_option = relationship("Genre_Options", back_populates="artists")
     
 
-class Accommadation(Base):
-    __tablename__ = "accommadations"
+# class Accommadation(Base):
+#     __tablename__ = "accommadations"
    
-    id = Column(Integer(), primary_key=True)
-    age_limit= Column(String())
-    camping_availability = Column(String())
-    festival_capacity = Column(Integer())
+#     id = Column(Integer(), primary_key=True)
+#     age_limit= Column(String())
+#     camping_availability = Column(String())
+#     festival_capacity = Column(Integer())
 
-    def __repr__(self):
-        return f"id: {self.id}, age_limit: {self.age_limit}, camping_availability: {self.camping_availability}, festival_capacity: {self.festival_capacity}"
+#     def __repr__(self):
+#         return f"id: {self.id}, age_limit: {self.age_limit}, camping_availability: {self.camping_availability}, festival_capacity: {self.festival_capacity}"
     
-        #establishes relationship between accommodation and festival
-    festival = relationship("Festival", back_populates="accommodations")
+#         #establishes relationship between accommodation and festival
+#     festival_id = Column(Integer(), ForeignKey('festivals.id'))
+#     festival = relationship("Festival", back_populates="accommodations")
 
     
 
@@ -62,8 +65,10 @@ class Festival(Base):
         return f"id: {self.id}, name: {self.name}, location: {self.location}, date: {self.date}, location: {self.location}, price: {self.price}"
     
     #establishes relationship between festival and artist
-    accommodations = relationship("Accommodation", back_populates="festival")
+    # artist_id = Column(Integer(), ForeignKey('artists.id'))
+    # accommodations = relationship("Accommodation", back_populates="festival")
     #establishes relationship between festival and add_to_cart
+
     add_to_carts = relationship("AddToCart", back_populates="festival")
     
 
@@ -74,6 +79,7 @@ class AddToCart(Base):
     festival_id = Column(Integer())
 
     #establishes relationship between festival and add_to_cart
+    festival_id = Column(Integer(), ForeignKey('festivals.id'))
     festival = relationship("Festival", back_populates="add_to_carts")
 
 if __name__ == '__main__':

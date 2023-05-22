@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import os
 
-from db.models import (Base, Artist, Accommadation, Festival)
+from db.models import (Base, Artist, Festival)
 
 
 engine = create_engine('sqlite:///edm.db')
@@ -58,13 +58,13 @@ if __name__ == '__main__':
     user_input = input(">>> ")
 
     if user_input == "111":
-        clear()
+        #clear()
         print("Here are all the EDM Festivals in your area:")
         for festival in session.query(Festival).all():
             print(festival.name)
         print("Press any key to exit")
         input(">>> ")
-        clear()
+        #clear()
 
     elif user_input == "222":
         clear()
