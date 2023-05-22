@@ -59,30 +59,27 @@ if __name__ == '__main__':
 
     if user_input == "111":
         #clear()
-        print("Here are all the EDM Festivals in your area:")
-        for festival in session.query(Festival).all():
-            print(festival.name)
-        print("Press any key to exit")
-        input(">>> ")
-        #clear()
+        print("Here are all the Genres:")
+        for genre_optiions in session.query(Genre).all():
+            print(genre_optiions.name)
 
     elif user_input == "222":
         clear()
         print("Here are all the Artists:")
-        for artist in session.query(Artist).all():
-            print(artist.name)
+        for artists in session.query(Artist).all():
+            print(artists.name)
         print("Press any key to exit")
         input(">>> ")
         clear()
     
-    elif user_input == "333":
-        clear()
-        print("Here are all the Accommodations:")
-        for accommadation in session.query(Accommadation).all():
-            print(accommadation.name)
-        print("Press any key to exit")
-        input(">>> ")
-        clear()
+    # elif user_input == "333":
+    #     clear()
+    #     print("Here are all the Accommodations:")
+    #     for accommadation in session.query(Accommadation).all():
+    #         print(accommadation.name)
+    #     print("Press any key to exit")
+    #     input(">>> ")
+    #     clear()
 
     elif user_input == "444":
         clear()
@@ -99,46 +96,6 @@ if __name__ == '__main__':
         for festival in session.query(Festival).all():
             if festival.accommadation:
                 print(festival.name)
-        print("Press any key to exit")
-        input(">>> ")
-        clear()
-    
-    elif user_input == "666":
-        clear()
-        print("Here are all the Festivals with Artists:")
-        for festival in session.query(Festival).all():
-            if festival.artists:
-                print(festival.name)
-        print("Press any key to exit")
-        input(">>> ")
-        clear()
-
-    elif user_input == "777":
-        clear()
-        print("Here are all the Festivals with Artists and Accommodations:")
-        for festival in session.query(Festival).all():
-            if festival.artists and festival.accommadation:
-                print(festival.name)
-        print("Press any key to exit")
-        input(">>> ")
-        clear()
-
-    elif user_input == "888":
-        clear()
-        print("Here are all the Festivals with Artists and Accommodations in your area:")
-        for festival in session.query(Festival).all():
-            if festival.artists and festival.accommadation and festival.location == user_location:
-                print(festival.name)
-        print("Press any key to exit")
-        input(">>> ")
-        clear()
-
-    elif user_input == "999":
-        clear()
-        print("Here are all the Festivals with Artists and Accommodations in your area and their prices:")
-        for festival in session.query(Festival).all():
-            if festival.artists and festival.accommadation and festival.location == user_location:
-                print(festival.name, " - ", festival.price)
         print("Press any key to exit")
         input(">>> ")
         clear()
