@@ -106,18 +106,17 @@ def remove_from_cart(session, add_to_cart):
 def collect_payment(cart_total):
     paid = False
     while not paid:
-        payment_method = input('Will you be paying with cash or card? ')
+        payment_method = input('Will you be paying with card or installments? ')
         if payment_method.lower() == 'card':
-            print('Processing...\n')
+            print_kind_of_slow('Processing...\n')
             paid = True
-        elif payment_method.lower() == 'cash':
-            payment = input('How much will you be paying with today? ')
+        elif payment_method.lower() == 'installments':
+            payment = input('Please enter your email address:\n')
             try:
-                payment = float(payment)
-                change = payment - cart_total
-                print(f'Your change is ${change:.2f}\n')
+                print_kind_of_slow('Processing...\n')
+                print_slowly("Processed! You will receive an email with your payment plan shortly.\n")
                 paid = True
             except:
-                print('Please enter a valid number.')
+                print('Please enter a valid email.')
         else:
             print('Please select a valid payment method.')
