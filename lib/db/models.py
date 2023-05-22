@@ -1,134 +1,58 @@
-
-from sqlalchemy import Column, String, Integer, func, ForeignKey
+from sqlalchemy import Column, ForeignKey, Integer, String, Table
+from sqlalchemy.orm import relationship, backref, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, relationship
 
 
 Base = declarative_base()
 
-class Genre_Options(Base):
-    __tablename__ = "genre_options"
-   
-    id = Column(Integer(), primary_key=True)
-    name = Column(String())
-
-    def __repr__(self):
-        return f"id: {self.id}, name: {self.name}"
-    
-      #establishes relationship between genre_options and artist
-    artist_id = Column(Integer(), ForeignKey('artists.id'))
-    artists = relationship("Artist", back_populates="genre_option")
-
-class Artist(Base):
-    __tablename__ = "artists"
-   
-    id = Column(Integer(), primary_key=True)
-    name = Column(String())
-    genre = Column(String()) 
-    
-    def __repr__(self):
-        return f"id: {self.id}, name: {self.name}, genre: {self.genre}"
-    
-        #establishes relationship between artist and genre_options
-    artist_id = Column(Integer(), ForeignKey('artists.id'))
-    genre_option = relationship("Genre_Options", back_populates="artists")
-    
-
-# class Accommadation(Base):
-#     __tablename__ = "accommadations"
-   
-#     id = Column(Integer(), primary_key=True)
-#     age_limit= Column(String())
-#     camping_availability = Column(String())
-#     festival_capacity = Column(Integer())
-
-#     def __repr__(self):
-#         return f"id: {self.id}, age_limit: {self.age_limit}, camping_availability: {self.camping_availability}, festival_capacity: {self.festival_capacity}"
-    
-#         #establishes relationship between accommodation and festival
-#     festival_id = Column(Integer(), ForeignKey('festivals.id'))
-#     festival = relationship("Festival", back_populates="accommodations")
-
-    
+festival_genre_option = Table(
+    'festival_genre_options',
+    Base.metadata,
+    Column('festival_id', Integer, ForeignKey('festivals.id'), primary_key=True),
+    Column('genre_option_id', Integer, ForeignKey('genre_options.id'), primary_key=True)
+)
 
 class Festival(Base):
     __tablename__ = "festivals"
-   
-    id = Column(Integer(), primary_key=True)
-    name = Column(String())
-    date = Column(String()) 
-    location = Column(String())
-    price = Column(Integer())
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    date = Column(String)
+    location = Column(String)
+    price = Column(Integer)
+
+    add_to_cart_id = Column(Integer, ForeignKey('add_to_carts.id'))
+    genres = relationship('Genre_Option', secondary=festival_genre_option, back_populates='festivals')
 
     def __repr__(self):
-        return f"id: {self.id}, name: {self.name}, location: {self.location}, date: {self.date}, location: {self.location}, price: {self.price}"
-    
-    #establishes relationship between festival and artist
-    # artist_id = Column(Integer(), ForeignKey('artists.id'))
-    # accommodations = relationship("Accommodation", back_populates="festival")
-    #establishes relationship between festival and add_to_cart
+        return f'Festival(id={self.id}, ' + \
+            f'name={self.name},' + \
+            f'date={self.date}, ' + \
+            f'location={self.location},' + \
+            f'price={self.price})'
 
-    add_to_carts = relationship("AddToCart", back_populates="festival")
-    
+class Genre_Option(Base):
+    __tablename__ = "genre_options"
 
-class AddToCart(Base):
+    id = Column(Integer, primary_key=True)
+    genre = Column(String)
+    add_to_carts = relationship('Add_To_Cart', backref='festival')
+    festivals = relationship('Festival', secondary=festival_genre_option, back_populates='genres')
+
+    def __repr__(self):
+        return f'Genre_Option(id={self.id}, ' + \
+            f'genre={self.genre})'
+
+class Add_To_Cart(Base):
     __tablename__ = "add_to_carts"
 
-    id = Column(Integer(), primary_key=True)
-    festival_id = Column(Integer())
+    id = Column(Integer, primary_key=True)
 
-    #establishes relationship between festival and add_to_cart
-    festival_id = Column(Integer(), ForeignKey('festivals.id'))
-    festival = relationship("Festival", back_populates="add_to_carts")
+    festivals = relationship('Festival')
+    genre_id = Column(Integer, ForeignKey('genre_options.id'))
 
-if __name__ == '__main__':
-    pass
-#-------------------CREATES THE TABLE-------------------
-#--------UNCOMMENT THIS TO CREATE THE TABLE-------------------
+    def __repr__(self):
+        return f'Add_To_Cart(id={self.id})'
 
-    # engine = create_engine('sqlite:///edm.db')
-    # Base.metadata.create_all(engine)
-
-#-------------------UPDATES ITEMS IN THE TABLE-------------------
-
-    # Session = sessionmaker(bind=engine)
-    # session = Session()
-    # record = session.query(Artist).filter_by(id=34).first()
-    # record.genre = "Hardstyle"
-    # session.commit()
-
-    # session.close()
-
-#-------------------ADDS ITEMS TO THE TABLE-------------------
-
-    # Session = sessionmaker(bind=engine)
-    # session = Session()
-
-    # Vibra_sphere = Artist(name="Vibra Sphere", genre="Psytrance")
-    # session.add(Vibra_sphere)
-    # session.commit()
-    # session.close()
-
-
-    #KIND OF MADE UP WITH BEING ALL AGES AND 16+
-
-    #Breakaway (16+)
-    #Sonic Therapy (All ages)
-    #Dancefest (All ages)
-    #FAM Fest (All ages)
-    #Chasing Sunsets (16+)
-    #Awakening Music Festival (16+)
-
-
-#-------------------DELETES ITEMS FROM THE TABLE-------------------
-
-    # Session = sessionmaker(bind=engine)
-    # session = Session()
-
-    # record = session.query(Genre_Options).filter_by(id=8).first()
-    # session.delete(record)
-
-    # session.commit()
-    # session.close()
 
