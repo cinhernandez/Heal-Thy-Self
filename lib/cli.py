@@ -67,12 +67,33 @@ if __name__ == '__main__':
         print("No festival events found for the selected genre.")
 
 
-    print_slowly("Return to the main menu? => exit")
+    print_slowly("Return to the main menu? => [exit] or [add] to add festival tickets")
     user_input = input(">>> ")
     if user_input == "exit":
         clear()
+    elif user_input == "add":
+        # Get the selected genre option
+        genre_option = None
+        while not genre_option:
+            genre_option_id = input('Please enter the ID of the genre you wish to look at: ')
+            genre_option = session.query(Genre_Option).filter(Genre_Option.id == genre_option_id).one_or_none()
+
+        if genre_option:
+            clear()
+            print_slowly(f"Genre selected: {genre_option.genre}")
+            festivals = get_festivals_by_genre(genre_option)
+            if festivals:
+                print_slowly(f"Here are the festival events for the genre '{genre_option.genre}':")
+                create_festivals_table(festivals)
+                add_to_cart = fill_cart(session, genre_option)  # Add festival tickets to the cart
+                if add_to_cart:
+                    show_cart(add_to_cart)  # Display the updated cart contents
+            else:
+                print("No festival events found for the selected genre.")
     else:
         print("Thank you for using Festival Finder.")
+
+
 
     
 
